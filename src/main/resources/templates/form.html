@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <title>HPConsultas</title>
+</head>
+
+<body class="grey lighten-3">
+
+    <nav>
+        <div class="nav-wrapper">
+            <a href="#" class="brand-logo">HP Consultas</a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li class="active"><a href="/consulta">pendentes</a></li>
+                <li><a href="#">concluídas</a></li>
+                <li><a href="#">usuários</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+
+        <h2>Cadastrar Consulta</h2>
+
+        <div class="card">
+            <div class="card-content">
+
+            <form class="col s12" th:action="${'/consulta'}" method="post" th:object="${consulta}">
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input 
+                            th:field="*{nomePaciente}" 
+                            type="text" 
+                            th:classappend="${#fields.hasErrors('nomePaciente')} ? invalid" 
+                        >
+                        <label for="nomePaciente">Nome Paciente</label>
+                        <span class="helper-text red-text" th:errors="*{nomePaciente}"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input 
+                            th:field="*{nomeMedico}" 
+                            type="text" 
+                            th:classappend="${#fields.hasErrors('nomeMedico')} ? invalid" 
+                        >
+                        <label for="nomeMedico">Título</label>
+                        <span class="helper-text red-text" th:errors="*{nomeMedico}"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <textarea 
+                            class="materialize-textarea" 
+                            th:field="*{especialidade}" 
+                            th:classappend="${#fields.hasErrors('especialidade')} ? invalid" 
+                        ></textarea>
+                        <label for="especialidade">Especialidade</label>
+                        <span class="helper-text red-text" th:errors="*{especialidade}"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input 
+                            th:field="*{local}" 
+                            type="text" 
+                            th:classappend="${#fields.hasErrors('local')} ? invalid" 
+                        >
+                        <label for="local">Título</label>
+                        <span class="helper-text red-text" th:errors="*{local}"></span>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="card-action right-align">
+                <a href="/consulta" class="btn grey">cancelar</a>
+                <button class="btn">cadastrar</button>
+            </div>
+
+            </form>
+        </div>
+
+
+    </div>
+
+
+
+
+</body>
+
+</html>

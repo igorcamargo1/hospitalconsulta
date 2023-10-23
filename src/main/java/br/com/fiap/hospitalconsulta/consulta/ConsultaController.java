@@ -1,6 +1,8 @@
 package br.com.fiap.hospitalconsulta.consulta;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Controller;
@@ -21,6 +23,9 @@ public class ConsultaController {
     
     @Autowired
     ConsultaService service;
+
+    @Autowired
+    MessageSource messageSource;
 
     @GetMapping
     public String index(Model model, @AuthenticationPrincipal OAuth2User user){
@@ -57,5 +62,9 @@ public class ConsultaController {
         service.save(consulta);
         redirect.addFlashAttribute("success", "Consulta cadastrada com sucesso");
         return "redirect:/consulta";
+    }
+
+     private String getMessage(String code){
+        return messageSource.getMessage(code, null, LocaleContextHolder.getLocale());
     }
 }
